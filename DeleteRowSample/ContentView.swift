@@ -9,9 +9,29 @@
 import SwiftUI
 
 struct ContentView: View {
+    
+    @State var appleDevices = ["iMac", "iPhone", "iPad", "appleWatch"]
+    
+    
     var body: some View {
-        Text("Hello, World!")
+        
+        NavigationView {
+            List {
+                
+                ForEach(appleDevices, id: \.self) { device in
+                    Text(device)
+                }
+                .onDelete(perform: self.deleteRow)
+                
+            }.navigationBarTitle(Text("Apple Devices"))
+        }
     }
+    
+    
+    private func deleteRow(at indexSet: IndexSet) {
+         self.appleDevices.remove(atOffsets: indexSet)
+     }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
